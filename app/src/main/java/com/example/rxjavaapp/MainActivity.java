@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.rxjava3.core.Observable;
@@ -39,11 +42,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(rvCustomAdapter);
 
-        Observable.just("Ayush","Monica", "Jack Sparrow", "Robert Downey Jr.", "Tom Crusie").subscribe(new Consumer<String>() {
-            @Override
-            public void accept(String s) throws Throwable {
-                rvCustomAdapter.addStringToList(s);
+//        Observable.just("Ayush","Monica", "Jack Sparrow", "Robert Downey Jr.", "Tom Crusie").subscribe(new Consumer<String>() {
+//            @Override
+//            public void accept(String s) throws Throwable {
+//                rvCustomAdapter.addStringToList(s);
+//
+//            }
+//        });
 
+        Entry entry1 = new Entry("PS4", BigDecimal.valueOf(1500),new Date());
+        Entry entry2 = new Entry("PS5", BigDecimal.valueOf(4500),new Date());
+        Entry entry3 = new Entry("X-Box ONE", BigDecimal.valueOf(1600),new Date());
+        Entry entry4 = new Entry("Nintendo", BigDecimal.valueOf(1300),new Date());
+        Observable.just(entry1,entry2,entry3,entry4).subscribe(new Consumer<Entry>() {
+            @Override
+            public void accept(Entry entry) throws Throwable {
+                rvCustomAdapter.addEntry(entry);
             }
         });
 
